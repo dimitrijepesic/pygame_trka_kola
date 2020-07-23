@@ -1,0 +1,40 @@
+import pygamebg
+
+(sirina, visina) = (400, 400)   
+prozor = pygamebg.open_window(sirina, visina, "Шетање лоптице тастатуром")
+
+pg.key.set_repeat(50, 25)
+
+(x, y) = (sirina // 2, visina // 2)  
+r = 40                               
+(dx, dy) = (2, 2)                  
+slika = pg.image.load('auto.png')
+a = slika.get_width()
+b = slika.get_height()
+def crtaj():
+    prozor.fill(pg.Color("white"))                    
+    prozor.blit(slika, (x-(a/2), y-(b/2))) 
+
+def obradi_dogadjaj(dogadjaj):
+    global x, y
+    if dogadjaj.type == pg.KEYDOWN:      
+ 
+        if dogadjaj.key == pg.K_LEFT:    
+            x -= dx                    
+            return True                  
+        
+        if dogadjaj.key == pg.K_RIGHT:    
+            x += dx                     
+            return True   
+       
+        if dogadjaj.key == pg.K_DOWN:    
+            y += dy                     
+            return True  
+        
+        if dogadjaj.key == pg.K_UP:    
+            y -= dy                     
+            return True  
+    return False                       
+
+pygamebg.event_loop(crtaj, obradi_dogadjaj)
+
